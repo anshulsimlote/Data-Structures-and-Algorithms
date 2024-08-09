@@ -2,7 +2,7 @@ package LinkedList;
 
 public class DoubleLinkedList {
     Node head;
-    Node tail; // Added tail pointer for efficient insertion at the end
+    Node tail;
 
     public class Node {
         int data;
@@ -16,7 +16,7 @@ public class DoubleLinkedList {
         }
     }
 
-    public void insert(int data) {
+    public void insertEnd(int data) {
         Node newNode = new Node(data);
         if (head == null) {
             head = newNode;
@@ -25,6 +25,18 @@ public class DoubleLinkedList {
             tail.next = newNode;
             newNode.prev = tail;
             tail = newNode; // Update tail to the new node
+        }
+    }
+
+    public void insertBegining(int data) {
+        Node newNode = new Node(data);
+        if (head == null) {
+            head = newNode;
+            tail = newNode; // Initialize tail
+        } else {
+            newNode.next = head;
+            head.prev = newNode; // Fixing the bug: update the prev pointer of the current head
+            head = newNode; // Update head to the new node
         }
     }
 
@@ -51,10 +63,11 @@ public class DoubleLinkedList {
     public static void main(String[] args) {
         System.out.println("Double Linked List");
         DoubleLinkedList dLinkedList = new DoubleLinkedList();
-        dLinkedList.insert(1);
-        dLinkedList.insert(2);
-        dLinkedList.insert(3);
-        dLinkedList.insert(4);
+        dLinkedList.insertEnd(1);
+        dLinkedList.insertEnd(2);
+        dLinkedList.insertEnd(3);
+        dLinkedList.insertEnd(4);
+        dLinkedList.insertBegining(0);
         dLinkedList.print(); // Print forward
         dLinkedList.printReverse(); // Print in reverse       
     }
