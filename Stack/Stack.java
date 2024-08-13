@@ -58,6 +58,7 @@ public class Stack {
 
     // Print the stack
     public void print() {
+        System.out.print("Stack is LIFO ");
         System.out.print("Stack using Linked List: ");
         Node cur = top;
         while (cur != null) {
