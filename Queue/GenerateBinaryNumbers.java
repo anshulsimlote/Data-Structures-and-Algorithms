@@ -1,4 +1,41 @@
-package Queue;
+// GenerateBinaryNumbers.java
+public class GenerateBinaryNumbers {
+
+    // Method to generate binary numbers up to a given number n
+    public String[] generateBinaryNumbersToN(int n) {
+        if (n <= 0) {
+            throw new IllegalArgumentException("Number of binary numbers to generate must be positive.");
+        }
+
+        String[] result = new String[n];
+        Queue<String> queue = new Queue<>();
+        queue.enQueue("1");
+
+        for (int i = 0; i < n; i++) {
+            result[i] = queue.deQueue(); // Get the current binary number
+            queue.enQueue(result[i] + "0"); // Add "0" to the end of the current binary number and enqueue
+            queue.enQueue(result[i] + "1"); // Add "1" to the end of the current binary number and enqueue
+        }
+
+        return result;
+    }
+
+    public static void main(String[] args) {
+        System.out.println("Generate Binary Numbers:");
+        GenerateBinaryNumbers generator = new GenerateBinaryNumbers();
+        int num = 5;
+
+        try {
+            String[] result = generator.generateBinaryNumbersToN(num);
+            System.out.println("Generated binary numbers up to " + num + ":");
+            for (String binary : result) {
+                System.out.println(binary);
+            }
+        } catch (IllegalArgumentException e) {
+            System.err.println(e.getMessage());
+        }
+    }
+}
 
 // Generic Queue class implementation
 class Queue<T> {
@@ -47,40 +84,3 @@ class Queue<T> {
     }
 }
 
-public class GenerateBinaryNumbers {
-
-    // Method to generate binary numbers up to a given number n
-    public String[] generateBinaryNumbersToN(int n) {
-        if (n <= 0) {
-            throw new IllegalArgumentException("Number of binary numbers to generate must be positive.");
-        }
-
-        String[] result = new String[n];
-        Queue<String> queue = new Queue<>();
-        queue.enQueue("1");
-
-        for (int i = 0; i < n; i++) {
-            result[i] = queue.deQueue(); // Get the current binary number
-            queue.enQueue(result[i] + "0"); // Add "0" to the end of the current binary number and enqueue
-            queue.enQueue(result[i] + "1"); // Add "1" to the end of the current binary number and enqueue
-        }
-
-        return result;
-    }
-
-    public static void main(String[] args) {
-        System.out.println("Generate Binary Numbers:");
-        GenerateBinaryNumbers generator = new GenerateBinaryNumbers();
-        int num = 5;
-
-        try {
-            String[] result = generator.generateBinaryNumbersToN(num);
-            System.out.println("Generated binary numbers up to " + num + ":");
-            for (String binary : result) {
-                System.out.println(binary);
-            }
-        } catch (IllegalArgumentException e) {
-            System.err.println(e.getMessage());
-        }
-    }
-}
