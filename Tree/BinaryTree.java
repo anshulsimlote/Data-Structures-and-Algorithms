@@ -41,6 +41,15 @@ public class BinaryTree {
         recursivePreorderTraversal(root.left); // Traverse left subtree
         recursivePreorderTraversal(root.right); // Traverse right subtree
     }
+    // Recursive method for inorder traversal
+    public void recursiveInorderTraversal(TreeNode root) {
+        if (root == null) {
+            return; // Base case: if node is null, return
+        }
+        recursiveInorderTraversal(root.left); // Traverse left subtree
+        System.out.print(root.data + " "); // Print the data of the current node
+        recursiveInorderTraversal(root.right); // Traverse right subtree
+    }
 
     // Iterative method for preorder traversal
     public void iterativePreorderTraversal(TreeNode root) {
@@ -76,6 +85,10 @@ public class BinaryTree {
 
         System.out.println("Iterative Preorder Traversal (Node -> Left Tree -> Right Tree):");
         binaryTree.iterativePreorderTraversal(binaryTree.root); // Perform iterative preorder traversal
+        System.out.println(); // New line for clarity
+
+        System.out.println("Recursive Inorder Traversal ( Left Tree -> Node ->  Right Tree):");
+        binaryTree.recursiveInorderTraversal(binaryTree.root); // Perform recursive inorder traversal
         System.out.println(); // New line for clarity
     }
 }
