@@ -55,8 +55,8 @@ public class BinaryTree {
         if (root == null) {
             return; // Base case: if node is null, return
         }
-        recursivePreorderTraversal(root.left); // Traverse left subtree
-        recursivePreorderTraversal(root.right); // Traverse right subtree
+        recursivePostorderTraversal(root.left); // Traverse left subtree
+        recursivePostorderTraversal(root.right); // Traverse right subtree
         System.out.print(root.data + " "); // Print the data of the current node
     }
 
@@ -83,7 +83,7 @@ public class BinaryTree {
         }
     }
 
-
+    // Iterative method for inorder traversal
     public void iterativeInorderTraversal(TreeNode root) {
         if (root == null) {
             return; // If the tree is empty, return
@@ -107,6 +107,37 @@ public class BinaryTree {
             currentNode = currentNode.right;
         }
     }
+
+    // Iterative method for postorder traversal
+    public void iterativePostorderTraversal(TreeNode root) {
+        if (root == null) {
+            return; // If the tree is empty, return
+        }
+
+        Stack<TreeNode> nodeStack = new Stack<>();
+        TreeNode lastVisitedNode = null;
+        TreeNode currentNode = root;
+
+        while (!nodeStack.isEmpty() || currentNode != null) {
+            if (currentNode != null) {
+                // Traverse left subtree
+                nodeStack.push(currentNode);
+                currentNode = currentNode.left;
+            } else {
+                TreeNode peekNode = nodeStack.peek();
+                // Traverse right subtree if not yet visited
+                if (peekNode.right != null && lastVisitedNode != peekNode.right) {
+                    currentNode = peekNode.right;
+                } else {
+                    // Visit the node
+                    System.out.print(peekNode.data + " ");
+                    lastVisitedNode = nodeStack.pop();
+                }
+            }
+        }
+    }
+
+
 
 
     public static void main(String[] args) {
@@ -132,6 +163,10 @@ public class BinaryTree {
 
         System.out.println("Recursive Postorder Traversal ( Left Tree ->  Right Tree -> Node):");
         binaryTree.recursivePostorderTraversal(binaryTree.root); // Perform recursive postorder traversal
+        System.out.println(); // New line for clarity
+
+        System.out.println("Iterative Postorder Traversal ( Left Tree ->  Right Tree -> Node):");
+        binaryTree.iterativePostorderTraversal(binaryTree.root); // Perform recursive postorder traversal
         System.out.println(); // New line for clarity
     }
 }
