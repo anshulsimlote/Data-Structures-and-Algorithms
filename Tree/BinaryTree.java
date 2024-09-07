@@ -1,5 +1,7 @@
 package Tree;
 
+import java.util.LinkedList;
+import java.util.Queue;
 import java.util.Stack;
 
 public class BinaryTree {
@@ -41,6 +43,7 @@ public class BinaryTree {
         recursivePreorderTraversal(root.left); // Traverse left subtree
         recursivePreorderTraversal(root.right); // Traverse right subtree
     }
+
     // Recursive method for inorder traversal
     public void recursiveInorderTraversal(TreeNode root) {
         if (root == null) {
@@ -50,6 +53,7 @@ public class BinaryTree {
         System.out.print(root.data + " "); // Print the data of the current node
         recursiveInorderTraversal(root.right); // Traverse right subtree
     }
+
     // Recursive method for postorder traversal
     public void recursivePostorderTraversal(TreeNode root) {
         if (root == null) {
@@ -137,6 +141,26 @@ public class BinaryTree {
         }
     }
 
+    // Recursive method for postorder traversal
+    public void levelOrderTraversal(TreeNode root) {
+        if (root == null) {
+            return; // Base case: if node is null, return
+        }
+        Queue<TreeNode> nodeQueue = new LinkedList<>();
+        nodeQueue.offer(root);
+        while(!nodeQueue.isEmpty()){
+            TreeNode tempNode = nodeQueue.poll();
+            System.out.print(tempNode.data + " "); // Print the data of the current node
+            if(tempNode.left != null){
+                nodeQueue.offer(tempNode.left);
+            }
+            if(tempNode.right != null){
+                nodeQueue.offer(tempNode.right);
+            }
+        }
+        
+    }
+
 
 
 
@@ -167,6 +191,10 @@ public class BinaryTree {
 
         System.out.println("Iterative Postorder Traversal ( Left Tree ->  Right Tree -> Node):");
         binaryTree.iterativePostorderTraversal(binaryTree.root); // Perform recursive postorder traversal
+        System.out.println(); // New line for clarity
+
+        System.out.println("Levelorder Traversal");
+        binaryTree.levelOrderTraversal(binaryTree.root); // Perform Levelorder Traversal
         System.out.println(); // New line for clarity
     }
 }
