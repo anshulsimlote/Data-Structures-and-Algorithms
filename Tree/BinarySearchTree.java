@@ -21,6 +21,10 @@ public class BinarySearchTree {
         return this; // Return 'this' to allow method chaining if desired
     }
 
+    public void search(int value) {
+        search(root, value);
+    }
+    
     // Recursive method to insert a value into the BST
     private TreeNode insert(TreeNode node, int value) {
         if (node == null) {
@@ -79,6 +83,22 @@ public class BinarySearchTree {
         System.out.print(node.data + " ");
     }
 
+    // Method to search for a value in the BST
+    private void search(TreeNode node, int data) {
+        if (node == null) {
+            System.out.println(data + " not found");
+            return;
+        }
+        if (node.data == data) {
+            System.out.println(data + " found");
+            return;
+        } else if (data < node.data) {
+            search(node.left, data);
+        } else {
+            search(node.right, data);
+        }
+    }
+
     // Main method to test the Binary Search Tree
     public static void main(String[] args) {
         System.out.println("Binary Search Tree");
@@ -96,5 +116,10 @@ public class BinarySearchTree {
 
         System.out.println("Postorder Traversal:");
         bst.postOrderTraversal();
+
+        // Search for values
+        System.out.println("Search results:");
+        bst.search(2);
+        bst.search(9);
     }
 }
