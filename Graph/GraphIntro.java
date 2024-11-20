@@ -52,6 +52,10 @@ public class GraphIntro {
         // Perform BFS traversal from node 1
         System.out.println("\nBFS traversal starting from node 1:");
         graph.breadthFirstSearch(adjacencyList, 1);
+
+        // Perform DFS traversal from node 1
+        System.out.println("\nDFS traversal starting from node 1:");
+        graph.depthFirstSearch(adjacencyList, 1);
     }
 
     public void createGraph(ArrayList<ArrayList<Node>> adjacencyList) {
@@ -103,5 +107,24 @@ public class GraphIntro {
             }
         }
         System.out.println("null");  // Indicate the end of traversal
+    }
+
+    // Depth-First Search algorithm to traverse the graph from a given source
+    public void depthFirstSearch(ArrayList<ArrayList<Node>> adjacencyList, int source) {
+        boolean[] visited = new boolean[adjacencyList.size()];
+        depthFirstSearchRec(adjacencyList, visited, source);
+        System.out.println("null");  // Indicate the end of traversal
+    }
+
+    // Recursive helper for DFS
+    public void depthFirstSearchRec(ArrayList<ArrayList<Node>> adjacencyList, boolean[] visited, int source) {
+        visited[source] = true;
+        System.out.print(source + " -> ");
+        for (Node tempNode : adjacencyList.get(source)) {
+            int dest = tempNode.destination;
+            if (!visited[dest]) {
+                depthFirstSearchRec(adjacencyList, visited, dest);
+            }
+        }
     }
 }
